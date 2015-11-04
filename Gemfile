@@ -23,12 +23,13 @@ gem "responders"
 gem "traceroute"
 gem "rails_12factor", group: :production
 gem "populator"
+gem "pry-rails"
+gem "ruby-prof"
 gem "newrelic_rpm"
 gem "skylight"
 gem "will_paginate"
 
 group :development, :test do
-  gem "pry-rails"
   gem "awesome_print"
   gem "web-console", "~> 2.0"
   gem "rspec-rails"
