@@ -1,5 +1,5 @@
 ## Scale Up
-The Scale Up involves taking a old brownfield project, fixing it, and scaling it
+The Scale Up involves taking a brownfield project, fixing it, and scaling it
 for production. The brownfield project is named Keevahh, and is loosely based on
 the famous [Kiva](http://www.kiva.org/) microlending platform.
 
@@ -34,7 +34,9 @@ The following profiling tools were used:
 ### Load Testing
 You can load test the application with:
 
-`rake load_script:run`
+```
+rake load_script:run
+```
 
 ### Loading the pre-seeded DB dump
 
@@ -61,12 +63,14 @@ $ heroku pg:push the_pivot_development DATABASE_URL
 ```
 
 ### Seeding Image URLs
-Image URLs were seeded in Rails Console using the following:
+Image URLs were seeded in Rails Console using:
 
-`LoanRequest.find_each { |lr| lr.update_columns(image_url: DefaultImages.random)
-}`
+```
+LoanRequest.find_each { |lr| lr.update_columns(image_url: DefaultImages.random)
+}
+```
 
-## Keevahh
+## The Original Keevahh
 
 Here is the information for the original Keevahh project developed by [Markus
 Olsen](https://github.com/neslom), [Trey Tomlinson](https://github.com/treyx),
