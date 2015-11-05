@@ -19,6 +19,11 @@ at:
 
 [https://keevahh-scaled-up.herokuapp.com/](https://keevahh-scaled-up.herokuapp.com/)
 
+### Project Specifications
+Specifications for the Scale Up can be found at:
+
+[https://github.com/turingschool/curriculum/blob/master/source/projects/the_scale_up.markdown](https://github.com/turingschool/curriculum/blob/master/source/projects/the_scale_up.markdown)
+
 ### Profiling / Performance Auditing
 The following profiling tools were used:
 
