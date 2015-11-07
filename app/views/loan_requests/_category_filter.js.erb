@@ -1,0 +1,14 @@
+<script>
+  $("#category").change(function() {
+    var $category = $(this).val();
+
+    $.ajax({
+      type:    "GET",
+      url:     "/browse",
+      data:    " category: " + $category,
+      success: function(data) {
+        document.location.href = "browse?category=" + $category
+      }
+    });
+  });
+</script>

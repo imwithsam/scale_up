@@ -2,14 +2,21 @@ class LoanRequestsController < ApplicationController
   before_action :set_loan_request, only: [:update, :show]
 
   def index
-    @loan_requests = LoanRequest.paginate(page: params[:page])
+    @categories = Category.all
+    @category = params[:category] || ""
+
+    if @category.empty? || @category.to_i < 1 || @category.to_i > @categories.count
+      @loan_requests = LoanRequest.paginate(page: params[:page], per_page: 10)
+    else
+      @loan_requests = LoanRequest.all.joins(:categories).where("category_id = #{@category}").paginate(page: params[:page], per_page: 10)
+    end
   end
 
   def create
     loan_request = current_user.loan_requests.new(loan_request_params)
 
     if loan_request.save
-      Category.find_by(title: params[:loan_request][:category]).loan_requests << loan_request
+      loan_request.categories << Category.find(params[:loan_request][:category])
       flash[:notice] = "Loan Request Created"
       redirect_to(:back)
     else
@@ -20,6 +27,7 @@ class LoanRequestsController < ApplicationController
 
   def edit
     @loan_request = LoanRequest.find(params[:id])
+    @categories = Category.pluck(:title, :id)
   end
 
   def show
@@ -28,6 +36,8 @@ class LoanRequestsController < ApplicationController
   def update
     respond_to do |format|
       if @loan_request.update(loan_request_params)
+        @loan_request.categories = [Category.find(params[:loan_request][:categories])]
+
         format.html { redirect_to loan_request_path(@loan_request), notice: 'Loan Request Updated' }
         format.json { render :show, status: :ok, location: @loan_request }
       else

@@ -5,11 +5,12 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3 pull-left">
-      <select class="form-control btn-info">
-        <option value="farming">Farming</option>
-        <option value="education">Education</option>
-        <option value="medical">Medical</option>
-        <option value="repair">Women</option>
+      <select id="category" class="form-control btn-info">
+        <option value="">All Categories</option>
+        <% @categories.each do |category| %>
+          <% selected = (@category && @category.to_i == category.id) ? "selected" : nil %>
+          <option value="<%= category.id %>" <%= selected %>><%= category.title %></option>
+        <% end %>
       </select>
     </div>
 
@@ -23,3 +24,6 @@
 <%= render "shared/lender_thumbnail" %>
 
 <%= will_paginate @loan_requests %>
+
+<%= render "category_filter.js" %>
+      .loan_requests << loan_request
