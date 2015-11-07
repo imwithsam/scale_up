@@ -19,6 +19,7 @@ class BorrowersController < ApplicationController
 
   def show
     @loan_requests = LoanRequest.where(user_id: params[:id])
+    @categories = Category.pluck(:title, :id)
   end
 
   private
