@@ -6,9 +6,9 @@ class LoanRequestsController < ApplicationController
     @category = params[:category] || ""
 
     if @category.empty? || @category.to_i < 1 || @category.to_i > @categories.count
-      @loan_requests = LoanRequest.paginate(page: params[:page], per_page: 10)
+      @loan_requests = LoanRequest.paginate(page: params[:page], per_page: 9)
     else
-      @loan_requests = LoanRequest.all.joins(:categories).where("category_id = #{@category}").paginate(page: params[:page], per_page: 10)
+      @loan_requests = LoanRequest.all.joins(:categories).where("category_id = #{@category}").paginate(page: params[:page], per_page: 9)
     end
   end
 
