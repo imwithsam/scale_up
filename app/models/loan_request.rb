@@ -12,6 +12,10 @@ class LoanRequest < ActiveRecord::Base
   enum repayment_rate: %w(monthly weekly)
   before_create :assign_default_image
 
+  def self.cached_count
+    Rails.cache.fetch("loan_requests_count") { count }
+  end
+
   def assign_default_image
     self.image_url = DefaultImages.random if self.image_url.to_s.empty?
   end
@@ -81,6 +85,9 @@ class LoanRequest < ActiveRecord::Base
   end
 
   def related_projects
-    (categories.flat_map(&:loan_requests) - [self]).shuffle.take(4)
+    LoanRequest.joins(:categories)
+               .where(categories: { title: categories.first.title })
+               .select(:id, :title, :image_url)
+               .take(4)
   end
 end
