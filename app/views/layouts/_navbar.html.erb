@@ -50,30 +50,31 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-
-<!-- Login Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <%= render "sessions/new" %>
+<% cache do %>
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <%= render "sessions/new" %>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Lender Signup Modal -->
-<div class="modal fade" id="lenderSignUpModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <%= render "lenders/new" %>
+  <!-- Lender Signup Modal -->
+  <div class="modal fade" id="lenderSignUpModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <%= render "lenders/new" %>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Borrower Signup Modal -->
-<div class="modal fade" id="borrowerSignUpModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <%= render "borrowers/new" %>
+  <!-- Borrower Signup Modal -->
+  <div class="modal fade" id="borrowerSignUpModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <%= render "borrowers/new" %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
