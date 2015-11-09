@@ -11,10 +11,10 @@ class LoanRequestsController < ApplicationController
                                           :description,
                                           :image_url,
                                           :amount,
-                                          :contributed,
-                                          "count(id) as loan_requests_count")
-                                  .group("loan_requests.id")
-                                  .paginate(page: params[:page], per_page: 9)
+                                          :contributed)
+                                  .paginate(page: params[:page],
+                                            per_page: 9,
+                                            total_entries: LoanRequest.cached_count)
     else
       @loan_requests = LoanRequest.all.joins(:categories)
                                       .select(:id,
@@ -22,10 +22,8 @@ class LoanRequestsController < ApplicationController
                                               :description,
                                               :image_url,
                                               :amount,
-                                              :contributed,
-                                              "count(id) as loan_requests_count")
+                                              :contributed)
                                       .where("category_id = #{@category}")
-                                      .group("loan_requests.id")
                                       .paginate(page: params[:page], per_page: 9)
     end
   end
