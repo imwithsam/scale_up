@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby "2.1.0", :engine => "rbx", :engine_version => "2.5.8"
+ruby "2.2.3"
 gem "rails", "4.2.0"
 gem "pg"
 gem "sass-rails", "~> 5.0"
@@ -24,7 +24,9 @@ gem "traceroute"
 gem "rails_12factor", group: :production
 gem "populator"
 gem "pry-rails"
+gem "ruby-prof"
 gem "newrelic_rpm"
+gem "skylight"
 gem "will_paginate"
 
 group :development, :test do
