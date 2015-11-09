@@ -81,6 +81,9 @@ class LoanRequest < ActiveRecord::Base
   end
 
   def related_projects
-    (categories.flat_map(&:loan_requests) - [self]).shuffle.take(4)
+    LoanRequest.joins(:categories)
+               .where(categories: { title: categories.first.title })
+               .select(:id, :title, :image_url)
+               .take(4)
   end
 end

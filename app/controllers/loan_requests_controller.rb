@@ -6,9 +6,27 @@ class LoanRequestsController < ApplicationController
     @category = params[:category] || ""
 
     if @category.empty? || @category.to_i < 1 || @category.to_i > @categories.count
-      @loan_requests = LoanRequest.paginate(page: params[:page], per_page: 9)
+      @loan_requests = LoanRequest.select(:id,
+                                          :title,
+                                          :description,
+                                          :image_url,
+                                          :amount,
+                                          :contributed,
+                                          "count(id) as loan_requests_count")
+                                  .group("loan_requests.id")
+                                  .paginate(page: params[:page], per_page: 9)
     else
-      @loan_requests = LoanRequest.all.joins(:categories).where("category_id = #{@category}").paginate(page: params[:page], per_page: 9)
+      @loan_requests = LoanRequest.all.joins(:categories)
+                                      .select(:id,
+                                              :title,
+                                              :description,
+                                              :image_url,
+                                              :amount,
+                                              :contributed,
+                                              "count(id) as loan_requests_count")
+                                      .where("category_id = #{@category}")
+                                      .group("loan_requests.id")
+                                      .paginate(page: params[:page], per_page: 9)
     end
   end
 
@@ -27,7 +45,6 @@ class LoanRequestsController < ApplicationController
 
   def edit
     @loan_request = LoanRequest.find(params[:id])
-    @categories = Category.pluck(:title, :id)
   end
 
   def show
@@ -60,6 +77,6 @@ class LoanRequestsController < ApplicationController
   end
 
   def set_loan_request
-    @loan_request = LoanRequest.find(params[:id])
+    @loan_request = LoanRequest.joins(:categories).find(params[:id])
   end
 end
