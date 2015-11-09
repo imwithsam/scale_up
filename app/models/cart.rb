@@ -11,9 +11,10 @@ class Cart
   end
 
   def cart_items_and_amount
-    loan_request = Hash.new
-    cart_items.select { |loan_request_id, amount| loan_request[LoanRequest.find(loan_request_id)] = amount }
-    loan_request
+    loan_request_ids = cart_items.keys
+    loan_request_amounts = cart_items.values
+    loan_requests = LoanRequest.includes(:user).find(loan_request_ids)
+    Hash[loan_requests.zip(loan_request_amounts)]
   end
 
   def delete_loan_request(loan_request_id)
