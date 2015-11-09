@@ -19,6 +19,9 @@ at:
 
 [https://keevahh-scaled-up.herokuapp.com/](https://keevahh-scaled-up.herokuapp.com/)
 
+*NOTE: The database on Heroku had to be reset due to the number of records
+exceeding Heroku's Hobby Dev allowances.*
+
 ### Project Specifications
 Specifications for the Scale Up can be found at:
 
