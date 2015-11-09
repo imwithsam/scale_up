@@ -20,7 +20,7 @@ class LendersController < ApplicationController
   end
 
   def show
-    @projects = @lender.projects.includes(:user)
+    @projects = @lender.projects.includes(:user, :categories)
 
     unless current_lender?
       redirect_to root_path, notice: "Access denied"
@@ -34,7 +34,7 @@ class LendersController < ApplicationController
   end
 
   def set_lender
-    @lender = User.find(params[:id])
+    @lender = User.joins(:projects, :loan_requests_contributors).find(params[:id])
   end
 
   def current_lender?
